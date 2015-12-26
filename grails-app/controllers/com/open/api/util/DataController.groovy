@@ -25,7 +25,7 @@ class DataController {
     	//读取日志中的内容
     	List<String> re= new File("D://log/15.log") as List<String>
     	re.each{
-    		print it
+    		//print it
     	}
 
     	File dir = new File(/D:\log/)
