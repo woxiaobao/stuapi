@@ -1,3 +1,14 @@
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.PropertiesLoaderUtils
+
+def properties
+
+try {
+    properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("app-config.properties"))
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -103,6 +114,7 @@ log4j.main = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
+   
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -114,4 +126,20 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+}
+
+
+cors.url.pattern = ['/file/*','/data/*']
+cors.headers = ['Access-Control-Allow-Headers':'origin, authorization, accept, content-type, x-requested-with, QY-AppKey, QY-AccessToken']
+
+
+filePath {
+    temp = properties.getProperty("filePath.temp")
+    upload = properties.getProperty("filePath.upload")
+}
+
+
+/*设置域类中未指定约束的所有字段可为空*/
+grails.gorm.default.constraints = {
+    '*'(nullable: true)
 }

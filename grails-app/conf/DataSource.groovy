@@ -1,3 +1,16 @@
+import java.io.IOException
+
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.PropertiesLoaderUtils
+
+def pros
+try {
+    pros = PropertiesLoaderUtils.loadProperties(new ClassPathResource("app-config.properties"))
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+
 dataSource {
     pooled = true
     jmxExport = true
